@@ -6,11 +6,16 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.util.Log;
+
 public class DataFetchr {
 	private static final String EVENTS_URL = "https://www.eventbriteapi.com/v3/events/search/?venue.city=Bangalore&token=****";
 	
 	public String fetchData(){
-		String data = null;
+		return new String(getUrlBytes(EVENTS_URL));
+	}
+	
+	public byte[] getUrlBytes(String urlSpec) {
 		HttpURLConnection connection = null;
 		try {
 			URL url = new URL(EVENTS_URL);
@@ -18,19 +23,23 @@ public class DataFetchr {
 			InputStream in = connection.getInputStream();
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			
+			if(connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				return null;
+			}
+			
 			byte[] buffer = new byte[1024];
 			int bytesRead = 0;
 			while((bytesRead = in.read(buffer)) > 0) {
 				out.write(buffer, 0, bytesRead);
 			}
 			out.close();
-			data = out.toByteArray().toString();
+			return out.toByteArray();
 		} catch(IOException ex) {}
 		finally {
 			if(connection != null) {
 				connection.disconnect();
 			}
 		}
-		return data;
+		return null;
 	}
 }

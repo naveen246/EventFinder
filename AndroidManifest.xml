@@ -4,8 +4,10 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="12"
         android:targetSdkVersion="19" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,13 +16,19 @@
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name="in.digitrack.eventfinder.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".EventListActivity" >
+            
+        </activity>
+            
         
     </application>
 

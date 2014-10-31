@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 public class Event {
-	private String mName, mLogoUrl, mId, mEventUrl, mVenueName, mVenueAddress, mStartTime, mEndTime, mTicketPrice, mOrganizer;
+	private String mName, mLogoUrl, mId, mEventUrl, mVenueName, mVenueAddress, mVenueCity, mStartTime, mEndTime, mTicketPrice, mOrganizer;
 	private boolean mIsFree;
 	
 	public String getName() {
@@ -74,7 +74,7 @@ public class Event {
 	public void setTicketPrice(String ticketPrice) {
 		mTicketPrice = ticketPrice;
 	}
-	public boolean isIsFree() {
+	public boolean isFree() {
 		return mIsFree;
 	}
 	public void setIsFree(boolean isFree) {
@@ -87,5 +87,13 @@ public class Event {
 		mOrganizer = organizer;
 	}
 	
-	
+	public String toString() {
+		return getName();
+	}
+	public String getVenueCity() {
+		return mVenueCity;
+	}
+	public void setVenueCity(String venueCity) {
+		mVenueCity = venueCity;
+	}
 }

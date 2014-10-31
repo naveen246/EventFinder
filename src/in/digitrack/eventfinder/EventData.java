@@ -1,6 +1,7 @@
 package in.digitrack.eventfinder;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,9 +11,10 @@ import org.json.JSONTokener;
 public final class EventData {
 	private ArrayList<Event> data;
 	private static EventData sEventData;
+	private Date receivedDate;
 	
 	private EventData() {
-		
+		data = null;
 	}
 	
 	public static EventData getInstance() {
@@ -20,6 +22,15 @@ public final class EventData {
 			sEventData = new EventData();
 		}
 		return sEventData;
+	}
+	
+	public boolean isDataAvailable() {
+		if(data == null) return false;
+		return true;
+	}
+	
+	public long getLastUpdatedTime() {
+		return receivedDate.getTime();
 	}
 	
 	private String getString(JSONObject obj, String... keys) {
@@ -57,6 +68,7 @@ public final class EventData {
 										 getString(eventObj, "venue", "address", "region") + " " +
 										 getString(eventObj, "venue", "address", "country");
 						event.setVenueAddress(address);
+						event.setVenueCity(getString(eventObj, "venue", "address", "city"));
 						event.setIsFree(false);
 						JSONArray ticketClassArr = eventObj.optJSONArray("ticket_classes");
 						if(ticketClassArr != null) {
@@ -74,9 +86,14 @@ public final class EventData {
 		return eventList;
 	}
 	
-	public void setResultString(String result) {
+	public void setData(String result) {
 		if(result != null) {
 			data = parseEventBriteData(result);
+			receivedDate = new Date();
 		}
+	}
+	
+	public ArrayList<Event> getData() {
+		return data;
 	}
 }

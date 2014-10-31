@@ -19,13 +19,20 @@ public final class R {
         public static final int ic_stat_right_arrow=0x7f020001;
     }
     public static final class id {
+        public static final int divider=0x7f070001;
+        public static final int eventDate_txtView=0x7f070005;
+        public static final int eventFree_txtView=0x7f070006;
+        public static final int eventName_txtView=0x7f070003;
+        public static final int eventPlace_txtView=0x7f070004;
+        public static final int event_imgView=0x7f070002;
         public static final int fragmentContainer=0x7f070000;
-        public static final int getin_btn=0x7f070002;
-        public static final int username_editTxt=0x7f070001;
+        public static final int getin_btn=0x7f070008;
+        public static final int username_editTxt=0x7f070007;
     }
     public static final class layout {
         public static final int container_activity=0x7f030000;
-        public static final int welcome_fragment=0x7f030001;
+        public static final int eventlist_item=0x7f030001;
+        public static final int welcome_fragment=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
