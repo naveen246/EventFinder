@@ -2,33 +2,37 @@ package in.digitrack.eventfinder;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.app.ListFragment;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EventListFragment extends ListFragment {
 	
 	ArrayList<Event> mEvents;
 	ThumbnailDownloader<ImageView> mThumbnailThread;
 	
+	public static final String ADAPTER_PARAM = "in.digitrack.eventfinder.adapterParam";
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
-		mEvents = new ArrayList<Event>();
-		updateItems();
+		mEvents = EventData.getInstance().getData();
 
 		mThumbnailThread = new ThumbnailDownloader<ImageView>(new Handler());
 		mThumbnailThread.setListener(new ThumbnailDownloader.Listener<ImageView>() {
@@ -47,20 +51,67 @@ public class EventListFragment extends ListFragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		setAdapter();
+		setDefaultAdapter();
+		getActivity().setTitle(R.string.discover_events);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	
-	public void updateItems() {
-		new FetchEventsTask().execute();
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.event_menu, menu);
 	}
 	
-	private void setAdapter() {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case R.id.discover_menu:
+			setDefaultAdapter();
+			return true;
+		case R.id.favourite_menu:
+			setFavouritesAdapter();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 0) {
+	        if (resultCode == Activity.RESULT_OK) {
+	            String param = data.getStringExtra(ADAPTER_PARAM);
+	            if(param.equals(getString(R.string.discover_events))) {
+	            	setDefaultAdapter();
+	            } else {
+	            	setFavouritesAdapter();
+	            }
+	        }
+	    }
+	}
+	
+	private void setFavouritesAdapter() {
+		ArrayList<Event> favouriteEvents = new ArrayList<Event>();
+		if(getActivity() != null) {
+			favouriteEvents = Favourites.getInstance(getActivity()).getEvents();
+			if(favouriteEvents != null) {
+				setListAdapter(new EventListAdapter(favouriteEvents));
+				getActivity().setTitle(R.string.favourite_events);
+			} else {
+				Toast.makeText(getActivity(), "Favourites list is empty", Toast.LENGTH_SHORT).show();
+				setDefaultAdapter();
+			}
+		}
+	}
+	
+	private void setDefaultAdapter() {
 		if(getActivity() == null) {
 			return;
 		}
 		if(mEvents != null) {
 			setListAdapter(new EventListAdapter(mEvents));
+			getActivity().setTitle(R.string.discover_events);
 		}
 		else {
 			setListAdapter(null);
@@ -113,40 +164,11 @@ public class EventListFragment extends ListFragment {
 				public void onClick(View v) {
 					Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
 					intent.putExtra(EventDetailsFragment.EXTRA_DATA, event);
-					startActivity(intent);
+					startActivityForResult(intent, 0);
 				}
 			});
 			
 			return convertView;
-		}
-	}
-	
-	private class FetchEventsTask extends AsyncTask<Void, Void, String> {
-		private ProgressDialog dialog;
-		
-		@Override
-		protected String doInBackground(Void... params) {
-			if(getActivity() == null) return null;
-			return new DataFetchr().fetchData();
-		}
-		
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			dialog = new ProgressDialog(getActivity());
-	        dialog.setMessage("Loading");
-	        dialog.show();
-		}
-		
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
-			if(dialog != null && dialog.isShowing()) {
-				dialog.dismiss();
-			}
-			EventData.getInstance().setData(result);
-			mEvents = EventData.getInstance().getData();
-			setAdapter();
 		}
 	}
 	

@@ -88,8 +88,8 @@ public final class EventData {
 	
 	public void setData(String result) {
 		if(result != null) {
-			data = parseEventBriteData(result);
 			receivedDate = new Date();
+			data = parseEventBriteData(result);
 		}
 	}
 	

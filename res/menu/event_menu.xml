@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+	<item 
+	    android:id="@+id/discover_menu"
+	    android:title="@string/discover_events"
+	    android:showAsAction="never" />
+	
+	<item 
+	    android:id="@+id/favourite_menu"
+	    android:title="@string/favourite_events"
+	    android:showAsAction="never" />
+    
+</menu>

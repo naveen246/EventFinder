@@ -3,5 +3,9 @@
     <string name="app_name">Event Finder</string>
 	<string name="enter_name">Enter your name</string>
 	<string name="getin">"Get In  "</string>
+	<string name="favourite">Add to favourites</string>
+	<string name="unfavourite">Remove from favourites</string>
+	<string name="discover_events">Discover</string>
+	<string name="favourite_events">Favourites</string>
 	
 </resources>

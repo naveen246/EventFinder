@@ -19,23 +19,26 @@ public final class R {
         public static final int ic_stat_right_arrow=0x7f020001;
     }
     public static final class id {
-        public static final int divider=0x7f070009;
-        public static final int eventDate_txtView=0x7f07000d;
-        public static final int eventDetail_addressTxtView=0x7f070005;
-        public static final int eventDetail_endTimeTxtView=0x7f070007;
-        public static final int eventDetail_imgView=0x7f070001;
-        public static final int eventDetail_nameTxtView=0x7f070002;
-        public static final int eventDetail_organizerTxtView=0x7f070003;
-        public static final int eventDetail_startTimeTxtView=0x7f070006;
-        public static final int eventDetail_ticketPriceTxtView=0x7f070008;
-        public static final int eventDetail_venueTxtView=0x7f070004;
-        public static final int eventFree_txtView=0x7f07000e;
-        public static final int eventName_txtView=0x7f07000b;
-        public static final int eventPlace_txtView=0x7f07000c;
-        public static final int event_imgView=0x7f07000a;
-        public static final int fragmentContainer=0x7f070000;
-        public static final int getin_btn=0x7f070010;
-        public static final int username_editTxt=0x7f07000f;
+        public static final int discover_menu=0x7f080012;
+        public static final int divider=0x7f08000a;
+        public static final int eventDate_txtView=0x7f08000e;
+        public static final int eventDetail_addressTxtView=0x7f080005;
+        public static final int eventDetail_endTimeTxtView=0x7f080007;
+        public static final int eventDetail_imgView=0x7f080001;
+        public static final int eventDetail_nameTxtView=0x7f080002;
+        public static final int eventDetail_organizerTxtView=0x7f080003;
+        public static final int eventDetail_startTimeTxtView=0x7f080006;
+        public static final int eventDetail_ticketPriceTxtView=0x7f080008;
+        public static final int eventDetail_venueTxtView=0x7f080004;
+        public static final int eventFree_txtView=0x7f08000f;
+        public static final int eventName_txtView=0x7f08000c;
+        public static final int eventPlace_txtView=0x7f08000d;
+        public static final int event_imgView=0x7f08000b;
+        public static final int favourite_btn=0x7f080009;
+        public static final int favourite_menu=0x7f080013;
+        public static final int fragmentContainer=0x7f080000;
+        public static final int getin_btn=0x7f080011;
+        public static final int username_editTxt=0x7f080010;
     }
     public static final class layout {
         public static final int container_activity=0x7f030000;
@@ -43,10 +46,17 @@ public final class R {
         public static final int eventlist_item=0x7f030002;
         public static final int welcome_fragment=0x7f030003;
     }
+    public static final class menu {
+        public static final int event_menu=0x7f070000;
+    }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int discover_events=0x7f050005;
         public static final int enter_name=0x7f050001;
+        public static final int favourite=0x7f050003;
+        public static final int favourite_events=0x7f050006;
         public static final int getin=0x7f050002;
+        public static final int unfavourite=0x7f050004;
     }
     public static final class style {
         /** 

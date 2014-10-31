@@ -1,8 +1,10 @@
 package in.digitrack.eventfinder;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,10 +20,13 @@ import android.widget.Toast;
 public class WelcomeFragment extends Fragment {
 	private EditText usrNameEditTxt;
 	private Button getInBtn;
+	private ProgressDialog dialog;
+	private boolean isBtnClicked = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		new FetchEventsTask().execute();
 	}
 	
 	@Override
@@ -48,12 +53,48 @@ public class WelcomeFragment extends Fragment {
 					Toast.makeText(getActivity(), "Please enter name", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				Intent intent = new Intent(getActivity(), EventListActivity.class);
-				startActivity(intent);
+				isBtnClicked = true;
+				if(!EventData.getInstance().isDataAvailable()) {
+					if(dialog == null) {
+						dialog = new ProgressDialog(getActivity());
+				        dialog.setMessage("Loading");
+				        dialog.show();
+					}
+				} else {
+					startListActivity();
+				}
 			}
 		});
 		return view;
 	}
 	
+	private void startListActivity() {
+		if(dialog != null && dialog.isShowing()) {
+			dialog.dismiss();
+		}
+		Intent intent = new Intent(getActivity(), EventListActivity.class);
+		startActivity(intent);
+	}
+	
+	private class FetchEventsTask extends AsyncTask<Void, Void, String> {
+		
+		@Override
+		protected String doInBackground(Void... params) {
+			if(getActivity() == null) return null;
+			return new DataFetchr().fetchData();
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if(dialog != null && dialog.isShowing()) {
+				dialog.dismiss();
+			}
+			EventData.getInstance().setData(result);
+			if(isBtnClicked) {
+				startListActivity();
+			}
+		}
+	}
 	
 }

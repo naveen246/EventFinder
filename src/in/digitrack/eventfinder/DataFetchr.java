@@ -6,17 +6,24 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.net.Uri;
+
 public class DataFetchr {
-	private static final String EVENTS_URL = "https://www.eventbriteapi.com/v3/events/search/?venue.city=Bangalore&token=****";
+	private static final String ENDPOINT = "https://www.eventbriteapi.com/v3/events/search/";
+
+	private String eventsUrl = Uri.parse(ENDPOINT).buildUpon()
+									.appendQueryParameter("venue.city", "Bangalore")
+									.appendQueryParameter("token", "****")
+									.build().toString();
 	
 	public String fetchData(){
-		return new String(getUrlBytes(EVENTS_URL));
+		return new String(getUrlBytes(eventsUrl));
 	}
 	
-	public byte[] getUrlBytes(String urlSpec) {
+	public byte[] getUrlBytes(String urlString) {
 		HttpURLConnection connection = null;
 		try {
-			URL url = new URL(EVENTS_URL);
+			URL url = new URL(urlString);
 			connection = (HttpURLConnection) url.openConnection();
 			InputStream in = connection.getInputStream();
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
