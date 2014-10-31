@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import android.util.Log;
-
 public class DataFetchr {
 	private static final String EVENTS_URL = "https://www.eventbriteapi.com/v3/events/search/?venue.city=Bangalore&token=****";
 	

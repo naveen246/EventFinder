@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical" >
+    
+	<ImageView 
+	    android:id="@+id/eventDetail_imgView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:adjustViewBounds="true" />
+	
+	<TextView 
+	    android:id="@+id/eventDetail_nameTxtView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:textStyle="bold" />
+	
+	<TextView 
+	    android:id="@+id/eventDetail_organizerTxtView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+	
+	<TextView 
+	    android:id="@+id/eventDetail_venueTxtView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+	
+	<TextView 
+	    android:id="@+id/eventDetail_addressTxtView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+	
+	<TextView 
+	    android:id="@+id/eventDetail_startTimeTxtView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+	
+	<TextView 
+	    android:id="@+id/eventDetail_endTimeTxtView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+	
+	<TextView 
+	    android:id="@+id/eventDetail_ticketPriceTxtView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+    
+</LinearLayout>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.ListFragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -84,7 +85,7 @@ public class EventListFragment extends ListFragment {
 			TextView eventPlaceTxtView = (TextView)convertView.findViewById(R.id.eventPlace_txtView);
 			TextView eventFreeTxtView = (TextView)convertView.findViewById(R.id.eventFree_txtView);
 			
-			Event event = getItem(position);
+			final Event event = getItem(position);
 			
 			eventNameTxtView.setText(event.getName());
 			eventDateTxtView.setText(event.getStartTime());
@@ -106,6 +107,15 @@ public class EventListFragment extends ListFragment {
 			} else {
 				imageView.setImageBitmap(null);
 			}
+			
+			convertView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
+					intent.putExtra(EventDetailsFragment.EXTRA_DATA, event);
+					startActivity(intent);
+				}
+			});
 			
 			return convertView;
 		}

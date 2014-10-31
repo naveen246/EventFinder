@@ -81,6 +81,7 @@ public class ThumbnailDownloader<Token> extends HandlerThread {
 	}
 	
 	public void queueThumbnail(Token token, String url) {
+		getLooper();
 		requestMap.put(token, url);
 		mHandler.obtainMessage(MESSAGE_DOWNLOAD, token).sendToTarget();
 	}

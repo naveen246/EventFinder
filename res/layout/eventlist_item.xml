@@ -30,14 +30,16 @@
         android:layout_toRightOf="@id/event_imgView"
         android:layout_below="@id/divider"
         android:paddingTop="20dp"
-        android:paddingBottom="10dp" />
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp" />
     
     <TextView 
         android:id="@+id/eventPlace_txtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/event_imgView"
-        android:layout_below="@id/eventName_txtView" />
+        android:layout_below="@id/eventName_txtView"
+        android:paddingRight="10dp" />
     
     <TextView 
         android:id="@+id/eventDate_txtView"

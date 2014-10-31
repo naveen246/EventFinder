@@ -1,10 +1,11 @@
 package in.digitrack.eventfinder;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class Event {
+public class Event implements Serializable {
 	private String mName, mLogoUrl, mId, mEventUrl, mVenueName, mVenueAddress, mVenueCity, mStartTime, mEndTime, mTicketPrice, mOrganizer;
 	private boolean mIsFree;
 	

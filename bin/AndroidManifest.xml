@@ -25,8 +25,12 @@
         </activity>
         
         <activity
-            android:name=".EventListActivity" >
-            
+            android:name=".EventListActivity"
+            android:launchMode="singleTop" >
+        </activity>
+        
+        <activity
+            android:name=".EventDetailsActivity" >
         </activity>
             
         
